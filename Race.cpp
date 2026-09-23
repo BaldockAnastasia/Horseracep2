@@ -34,16 +34,16 @@ void Horse::advance() {
                 spot++; 
 	}
 }
-int Horse::getSpot() const {
+int Horse::GetSpot() const {
 	return spot;
 }
 
-Race::race() {
+Race::Race() {
 	length = track_length;
 }
 
 void Race::pLane(int horseNum) {
-	int loc = horses[horseNum].getSpot();
+	int loc = horses[horseNum].GetSpot();
 	for (int i = 0; i < length; i++) {
 		if (i == loc) {
 			std::cout << horseNum + 1;
@@ -56,28 +56,28 @@ void Race::pLane(int horseNum) {
 }
 
 void Race::start() {
-	bool continue = true;
+	bool continueOn = true;
 
 	for (int n = 0; n < num_horses; n++) {
 		pLane(n);
 	}
-	std::cout << "\nGet ready, Get Set, GO!!" std::endl;
+	std::cout << "\nGet ready, Get Set, GO!!" <<  std::endl;
 	std::cin.get();
 
-	while (continue); {
+	while (continueOn); {
 		for (int number = 0; number < num_horses; number++) {
 			horses[number].advance();
 			pLane(number);
 
-			if (horses[number].getSpot() >= length) {
-				continue = false;
+			if (horses[number].GetSpot() >= length) {
+				continueOn = false;
 				std::cout << "\nHorse "
 					  << number + 1
 					  << " is the winner!\n";
 			}
 		}
 
-		if (continue) {
+		if (continueOn) {
 			std::cout << "\nPress enter to take another turn...";
 			std::cin.get();
 		}
